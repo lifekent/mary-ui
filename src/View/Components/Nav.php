@@ -15,7 +15,7 @@ class Nav extends Component
         // Slots
         public mixed $brand = null,
         public mixed $actions = null,
-        public string $innerClass = null,
+        public ?string $innerClass = null,
     ) {
         //
     }
