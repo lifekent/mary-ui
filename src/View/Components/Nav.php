@@ -14,7 +14,8 @@ class Nav extends Component
 
         // Slots
         public mixed $brand = null,
-        public mixed $actions = null
+        public mixed $actions = null,
+        public string $innerClass = null,
     ) {
         //
     }
@@ -23,7 +24,7 @@ class Nav extends Component
     {
         return <<<'HTML'
                     <div {{ $attributes->class(["bg-base-100 border-base-300 border-b", "sticky top-0 z-10" => $sticky]) }}>
-                        <div @class(["flex items-center px-6 py-5",  "max-w-screen-2xl mx-auto" => !$fullWidth])>
+                        <div @class(["flex items-center px-6 py-5",  "max-w-screen-2xl mx-auto" => !$fullWidth, $innerClass => $innerClass])>
                             <div {{ $brand?->attributes->class(["flex-1 flex items-center"]) }}>
                                 {{ $brand }}
                             </div>
