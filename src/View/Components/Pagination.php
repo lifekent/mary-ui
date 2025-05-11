@@ -15,6 +15,8 @@ class Pagination extends Component
     public function __construct(
         public ArrayAccess|array $rows,
         public ?array $perPageValues = [10, 20, 50, 100],
+        public bool $showPerPage = true,
+        public bool $resultsPerPage = true,
     ) {
         $this->uuid = "mary" . md5(serialize($this));
     }
@@ -26,7 +28,7 @@ class Pagination extends Component
 
     public function isShowable(): bool
     {
-        return ! empty($this->modelName()) && $this->rows instanceof LengthAwarePaginator && $this->rows->isNotEmpty();
+        return $this->showPerPage && ! empty($this->modelName()) && $this->rows instanceof LengthAwarePaginator && $this->rows->isNotEmpty();
     }
 
     public function render(): View|Closure|string
@@ -49,7 +51,7 @@ class Pagination extends Component
                     @if($rows instanceof LengthAwarePaginator)
                         {{ $rows->onEachSide(1)->links(data: ['scrollTo' => false]) }}
                     @else
-                        {{ $rows->links(data: ['scrollTo' => false]) }}
+                        {{ $rows->links('vendor.pagination.tailwind') }}
                     @endif
                     </div>
                 </div>
